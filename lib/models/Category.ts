@@ -1,12 +1,15 @@
 import mongoose, { Schema } from "mongoose";
 
 type CategorySchemaType = {
-  name: string;
+  categoryName: string;
 };
 
-const CategorySchema = new Schema({
-  name: String,
-});
+const CategorySchema = new Schema(
+  {
+    categoryName: { type: String, required: true },
+  },
+  { timestamps: true, versionKey: false }
+);
 
 export const Category =
   mongoose.models.Category ||

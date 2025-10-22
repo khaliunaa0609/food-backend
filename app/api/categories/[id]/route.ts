@@ -1,14 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
 import { deleteCategoryById } from "@/lib/services/category-service";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
-  let categories = await deleteCategoryById(id);
-
-  console.log("newCategories===", categories, "===newCategories");
+  const { id } = await params;
+  const categories = await deleteCategoryById(id);
 
   return NextResponse.json({ data: categories }, { status: 200 });
 }
